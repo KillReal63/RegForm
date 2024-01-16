@@ -1,0 +1,26 @@
+.main {
+  width: 900px;
+  height: 704px;
+  background-color: whitesmoke;
+  padding: 24px 24px 0 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 64px 0;
+}
+.select {
+  max-width: 400px;
+  height: 44px;
+  border: 1px solid #00000029;
+  border-radius: 4px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

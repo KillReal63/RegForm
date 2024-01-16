@@ -1,0 +1,31 @@
+.main {
+  width: 900px;
+  height: 704px;
+  background-color: whitesmoke;
+  padding: 24px 24px 0 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-style: none none solid none;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 80px;
+  margin: 24px;
+  border-radius: 100px;
+  background-color: #d5e4f7;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
