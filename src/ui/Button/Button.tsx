@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from 'react';
 import styles from './Button.module.css';
 
 interface Props {
-  onClick: () => void;
+  onClick?: () => void;
   variant: string;
 }
 

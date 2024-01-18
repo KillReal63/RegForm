@@ -1,13 +1,15 @@
-import About from '../../pages/Step1/About';
+import Profile from '../../pages/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main';
-import Advantages from '../../pages/Step2/Advantages';
+import Advantages from '../../pages/Advantages/Advantages';
+import About from '../../pages/About/About';
 
 const Router = () => {
   const routes = [
     { name: 'main', path: '/', element: <Main /> },
-    { name: 'about', path: '/about', element: <About /> },
+    { name: 'profile', path: '/profile', element: <Profile /> },
     { name: 'advantages', path: '/advantages', element: <Advantages /> },
+    { name: 'about', path: '/about', element: <About /> },
   ];
 
   const route = routes.map(({ name, path, element }) => (

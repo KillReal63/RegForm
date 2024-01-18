@@ -1,12 +1,12 @@
-import styles from './About.module.css';
+import styles from './Profile.module.css';
 import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
-import HeaderStepper from '../../ui/Stepper/Stepper';
+import FormStepper from '../../ui/FormStepper/FormStepper';
 
-const About = () => {
+const Profile = () => {
   return (
     <div className={styles.main}>
-      <HeaderStepper step={0} />
+      <FormStepper />
       <form className={styles.form}>
         <label>Никнейм</label>
         <Input placeholder='placeholder' />
@@ -29,4 +29,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Profile;

@@ -1,7 +1,11 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 900px;
   height: 704px;
-  background-color: whitesmoke;
+  background-color: #FFFFFF;
+  border-radius: 24px;
   padding: 24px 24px 0 24px;
 }
 
@@ -11,16 +15,9 @@
   gap: 24px;
   margin: 64px 0;
 }
-.select {
-  max-width: 400px;
-  height: 44px;
-  border: 1px solid #00000029;
-  border-radius: 4px;
-  padding: 12px;
-  box-sizing: border-box;
-}
 
 .footer {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }

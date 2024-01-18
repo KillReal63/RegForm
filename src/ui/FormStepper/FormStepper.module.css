@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 680px;
+  height: 48px;
+}
+
+.current_step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 660px;
+  color: #5558FA
+}
