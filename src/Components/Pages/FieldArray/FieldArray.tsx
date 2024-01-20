@@ -3,7 +3,7 @@ import { useController, useFieldArray } from 'react-hook-form';
 import Button from '../../../ui/Button/Button';
 import Input from '../../../ui/Input/Input';
 
-const FieldArray = ({ control, register  }) => {
+const FieldArray = ({ control, register }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'test',
@@ -29,7 +29,7 @@ const FieldArray = ({ control, register  }) => {
           </div>
         ))}
       </div>
-      <Button onClick={() => append({ value: '' })}>+</Button>
+      <Button onClick={() => append({ value: '123' })}>+</Button>
     </div>
   );
 };

@@ -2,8 +2,19 @@ import styles from './Profile.module.css';
 import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const onClick = (variant: string) => {
+    if (variant === 'forward') {
+      navigate('/advantages');
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <div className={styles.main}>
       <FormStepper />
@@ -22,8 +33,12 @@ const Profile = () => {
         </select>
       </form>
       <div className={styles.footer}>
-        <Button variant='back'>Назад</Button>
-        <Button variant='forward'>Далее</Button>
+        <Button variant='back' onClick={() => onClick('back')}>
+          Назад
+        </Button>
+        <Button variant='forward' onClick={() => onClick('forward')}>
+          Далее
+        </Button>
       </div>
     </div>
   );

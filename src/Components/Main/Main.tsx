@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Input from '../../ui/Input/Input';
 import styles from './Main.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
   phone: yup.number().positive().integer().required(),
@@ -13,8 +14,10 @@ const schema = yup.object({
 const Main = () => {
   const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
+  const navigate = useNavigate();
+
   const onClick = () => {
-    console.log('start');
+    navigate('/profile');
   };
   const onSubmit = () => console.log('test');
 

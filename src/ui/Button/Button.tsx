@@ -3,7 +3,7 @@ import styles from './Button.module.css';
 
 interface Props {
   onClick?: () => void;
-  variant: string;
+  variant?: string;
 }
 
 const Button: FC<PropsWithChildren<Props>> = ({
