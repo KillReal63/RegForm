@@ -30,8 +30,8 @@ const About = () => {
         <Button variant='forward' onClick={() => setOpen(true)}>
           Далее
         </Button>
-        {open && <Modal onClose={closeModal} open={open} />}
       </div>
+      {open && <Modal onClose={closeModal} open={open} />}
     </div>
   );
 };

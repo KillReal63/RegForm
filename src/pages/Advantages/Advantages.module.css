@@ -3,10 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 900px;
-  height: 704px;
   background-color: #FFFFFF;
   border-radius: 24px;
   padding: 24px 24px 0 24px;
+  margin-top: 24px;
 }
 
 .form {
@@ -21,4 +21,5 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 80px;
 }

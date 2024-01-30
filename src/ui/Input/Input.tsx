@@ -3,10 +3,13 @@ import styles from './Input.module.css';
 
 interface IProps {
   placeholder: string;
+  type?: string;
 }
 
 const Input: FC<IProps> = ({ placeholder, ...props }) => {
-  return <input className={styles.input} placeholder={placeholder} {...props} />;
+  return (
+    <input className={styles.input} placeholder={placeholder} {...props} />
+  );
 };
 
 export default Input;

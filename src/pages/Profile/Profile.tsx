@@ -3,16 +3,17 @@ import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup' 
 
 const Profile = () => {
   const navigate = useNavigate();
 
-  const onClick = (variant: string) => {
-    if (variant === 'forward') {
-      navigate('/advantages');
-    } else {
-      navigate(-1);
-    }
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: {}) => {
+    navigate('/advantages');
+    console.log(data);
   };
 
   return (
@@ -20,23 +21,25 @@ const Profile = () => {
       <FormStepper />
       <form className={styles.form}>
         <label>Никнейм</label>
-        <Input placeholder='placeholder' />
+        <Input type='text' placeholder='Placeholder' />
         <label>Имя</label>
-        <Input placeholder='placeholder' />
+        <Input type='text' placeholder='Placeholder' />
         <label>Фамилия</label>
-        <Input placeholder='placeholder' />
+        <Input type='text' placeholder='Placeholder' />
         <label>Пол</label>
         <select className={styles.select}>
-          <option value='no-select'>Не выбрано</option>
-          <option value='male'>male</option>
-          <option value='female'>female</option>
+          <option value='no-select' disabled selected>
+            Не выбрано
+          </option>
+          <option value='male'>мужской</option>
+          <option value='female'>женский</option>
         </select>
       </form>
       <div className={styles.footer}>
-        <Button variant='back' onClick={() => onClick('back')}>
+        <Button variant='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
-        <Button variant='forward' onClick={() => onClick('forward')}>
+        <Button variant='forward' onClick={handleSubmit(onSubmit)}>
           Далее
         </Button>
       </div>
