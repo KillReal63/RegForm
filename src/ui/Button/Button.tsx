@@ -4,6 +4,7 @@ import styles from './Button.module.css';
 interface Props {
   onClick?: () => void;
   variant?: string;
+  type?: string;
 }
 
 const Button: FC<PropsWithChildren<Props>> = ({
