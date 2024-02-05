@@ -25,25 +25,21 @@ const Advantages = () => {
       <FormStepper variant='secondary' />
       <form className={styles.form}>
         <FieldArray control={control} />
-        <Checkbox
-          options={['1', '2', '3']}
-          control={control}
-          name='controlled'
-        />
+        <Checkbox options={[1, 2, 3]} control={control} />
         <div>
           <div>
-            <input type='radio' id='1' name='drone' value='huey' />
-            <label htmlFor='1'>Huey</label>
+            <input type='radio' name='drone' value='1' />
+            <label htmlFor='1'>1</label>
           </div>
 
           <div>
-            <input type='radio' id='2' name='drone' value='dewey' />
-            <label htmlFor='2'>Dewey</label>
+            <input type='radio' name='drone' value='2' />
+            <label htmlFor='2'>2</label>
           </div>
 
           <div>
-            <input type='radio' id='3' name='drone' value='louie' />
-            <label htmlFor='3'>Louie</label>
+            <input type='radio' name='drone' value='3' />
+            <label htmlFor='3'>3</label>
           </div>
         </div>
       </form>

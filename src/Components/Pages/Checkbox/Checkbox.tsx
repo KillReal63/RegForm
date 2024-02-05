@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useController } from 'react-hook-form';
+import { FC, useState } from 'react';
+import { Control, useController } from 'react-hook-form';
 
-const Checkbox = ({ options, control, name }) => {
+type Props = {
+  control: Control;
+  options: number[];
+};
+
+const Checkbox: FC<Props> = ({ options, control }) => {
   const { field } = useController({
     control,
-    name,
+    name: 'controlled',
   });
+
   const [value, setValue] = useState(field.value || []);
-
-  // console.log(control, 'control');
-
-  // console.log(field, 'field');
-
-  // console.log(value, 'value');
 
   return (
     <>
@@ -21,20 +21,16 @@ const Checkbox = ({ options, control, name }) => {
           <input
             onChange={(e) => {
               const valueCopy = [...value];
-
-              // update checkbox value
-              valueCopy[index] = e.target.checked ? e.target.value : '';
-
-              // send data to react hook form
+              valueCopy[index] = e.target.checked
+                ? parseInt(e.target.value)
+                : '';
               field.onChange(valueCopy);
-
-              // update local state
               setValue(valueCopy);
             }}
             style={{
               marginRight: 6,
             }}
-            key={option}
+            key={index}
             type='checkbox'
             checked={value.includes(option)}
             value={option}

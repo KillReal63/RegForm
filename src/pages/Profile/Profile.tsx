@@ -3,7 +3,7 @@ import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import { useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Select from 'react-select';
@@ -54,7 +54,7 @@ const Profile = () => {
 
   console.log(errors, 'errors');
 
-  const onSubmit = (data: Data) => {
+  const onSubmit: SubmitHandler<Data> = (data) => {
     console.log(data, 'data');
     navigate('/advantages');
   };
@@ -68,57 +68,80 @@ const Profile = () => {
       <FormStepper />
       <form className={styles.form}>
         <div className={styles.input}>
-          <label>Никнейм</label>
-          <Controller
-            name='nickName'
-            control={control}
-            defaultValue=''
-            render={({ field }) => (
-              <Input type='text' placeholder='Placeholder' {...field} />
-            )}
-          />
-          <p>{errors.nickName?.message}</p>
+          <label>
+            Никнейм
+            <Controller
+              name='nickName'
+              control={control}
+              defaultValue=''
+              render={({ field: { ref, ...field } }) => (
+                <Input
+                  type='text'
+                  placeholder='Placeholder'
+                  {...field}
+                  inputRef={ref}
+                />
+              )}
+            />
+            {errors.nickName?.message}
+          </label>
         </div>
         <div className={styles.input}>
-          <label>Имя</label>
-          <Controller
-            name='firstName'
-            control={control}
-            defaultValue=''
-            render={({ field }) => (
-              <Input type='text' placeholder='Placeholder' {...field} />
-            )}
-          />
-          <p>{errors.firstName?.message}</p>
+          <label>
+            Имя
+            <Controller
+              name='firstName'
+              control={control}
+              defaultValue=''
+              render={({ field: { ref, ...field } }) => (
+                <Input
+                  type='text'
+                  placeholder='Placeholder'
+                  {...field}
+                  inputRef={ref}
+                />
+              )}
+            />
+            {errors.firstName?.message}
+          </label>
         </div>
         <div className={styles.input}>
-          <label>Фамилия</label>
-          <Controller
-            name='lastName'
-            control={control}
-            defaultValue=''
-            render={({ field }) => (
-              <Input type='text' placeholder='Placeholder' {...field} />
-            )}
-          />
-          <p>{errors.lastName?.message}</p>
+          <label>
+            Фамилия
+            <Controller
+              name='lastName'
+              control={control}
+              defaultValue=''
+              render={({ field: { ref, ...field } }) => (
+                <Input
+                  type='text'
+                  placeholder='Placeholder'
+                  {...field}
+                  inputRef={ref}
+                />
+              )}
+            />
+            {errors.lastName?.message}
+          </label>
         </div>
         <div style={{ width: 300, height: 120 }}>
-          <label>Пол</label>
-          <Controller
-            name='gender'
-            control={control}
-            render={({ field }) => (
-              <Select
-                className={styles.select}
-                {...field}
-                options={[
-                  { value: 'man', label: 'Man' },
-                  { value: 'woman', label: 'Woman' },
-                ]}
-              />
-            )}
-          />
+          <label>
+            Пол
+            <Controller
+              name='gender'
+              control={control}
+              render={({ field }) => (
+                <Select
+                  className={styles.select}
+                  {...field}
+                  options={[
+                    { value: 'man', label: 'Man' },
+                    { value: 'woman', label: 'Woman' },
+                  ]}
+                />
+              )}
+            />
+          </label>
         </div>
       </form>
       <div className={styles.footer}>
