@@ -2,22 +2,24 @@ import { FC, PropsWithChildren } from 'react';
 import styles from './Button.module.css';
 
 interface Props {
-  onClick?: () => void;
+  onClick: () => void;
   variant?: string;
-  type?: string;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 const Button: FC<PropsWithChildren<Props>> = ({
   children,
   onClick,
   variant,
+  type,
 }) => {
   return (
     <button
+      type={type}
       className={` ${styles.button} ${
         variant === 'forward' ? styles.button_forward : styles.button_back
       }`}
-      onClick={() => onClick()}
+      onClick={onClick}
     >
       {children}
     </button>

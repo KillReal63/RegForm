@@ -7,24 +7,26 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 const Advantages = () => {
-  const { control, register } = useForm();
+  const { control, handleSubmit } = useForm();
+
   const navigate = useNavigate();
 
-  const onClick = (variant: string) => {
-    if (variant === 'forward') {
-      navigate('/about');
-    } else {
-      navigate(-1);
-    }
+  const onSubmit = (data: unknown) => {
+    console.log(data, 'data');
+    navigate('/about');
+  };
+
+  const handleNextClick = () => {
+    handleSubmit(onSubmit)();
   };
 
   return (
     <div className={styles.main}>
       <FormStepper variant='secondary' />
       <form className={styles.form}>
-        <FieldArray control={control} register={register} />
+        <FieldArray control={control} />
         <Checkbox
-          options={['a', 'b', 'c']}
+          options={['1', '2', '3']}
           control={control}
           name='controlled'
         />
@@ -46,10 +48,10 @@ const Advantages = () => {
         </div>
       </form>
       <div className={styles.footer}>
-        <Button variant='back' onClick={() => onClick('back')}>
+        <Button variant='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
-        <Button variant='forward' onClick={() => onClick('forward')}>
+        <Button type='submit' variant='forward' onClick={handleNextClick}>
           Далее
         </Button>
       </div>
