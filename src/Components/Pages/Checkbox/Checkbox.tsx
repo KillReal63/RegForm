@@ -10,7 +10,7 @@ type Props = {
 const Checkbox: FC<Props> = ({ options, control }) => {
   const { field } = useController({
     control,
-    name: 'controlled',
+    name: 'checkboxGroup',
   });
 
   const [value, setValue] = useState(field.value || []);
@@ -18,7 +18,7 @@ const Checkbox: FC<Props> = ({ options, control }) => {
   return (
     <div className={styles.wrapper}>
       {options.map((option, index) => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }} key={index}>
           <input
             onChange={(e) => {
               const valueCopy = [...value];
@@ -33,7 +33,7 @@ const Checkbox: FC<Props> = ({ options, control }) => {
             checked={value.includes(option)}
             value={option}
           />
-          <label style={{ marginLeft: 10 }} key={index}>
+          <label style={{ marginLeft: 10 }}>
             {option}
           </label>
         </div>

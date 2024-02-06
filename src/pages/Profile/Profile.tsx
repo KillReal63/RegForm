@@ -52,8 +52,6 @@ const Profile = () => {
     resolver: yupResolver(schema),
   });
 
-  console.log(errors, 'errors');
-
   const onSubmit: SubmitHandler<Data> = (data) => {
     console.log(data, 'data');
     navigate('/advantages');

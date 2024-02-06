@@ -57,6 +57,8 @@ const FieldArray = ({ control }: { control: Control }) => {
           background: 'none',
           border: 'none',
           cursor: 'pointer',
+          width: 44,
+          height: 44,
         }}
         type='button'
         onClick={() =>
@@ -68,14 +70,14 @@ const FieldArray = ({ control }: { control: Control }) => {
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 24 24'
-          width='32'
-          height='32'
+          width='44'
+          height='44'
           className='main-grid-item-icon'
           fill='none'
           stroke='#5558FA'
           strokeLinecap='round'
           strokeLinejoin='round'
-          strokeWidth='2'
+          strokeWidth='1.5'
         >
           <rect height='18' rx='2' ry='2' width='18' x='3' y='3' />
           <line x1='12' x2='12' y1='8' y2='16' />
