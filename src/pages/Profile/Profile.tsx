@@ -34,8 +34,8 @@ const schema = yup
       .max(50),
     gender: yup
       .object({
-        value: yup.string().required('Please select a gender'),
-        label: yup.string().required(),
+        value: yup.string().required(),
+        label: yup.string().required('Please select a gender'),
       })
       .required(),
   })
@@ -68,61 +68,55 @@ const Profile = () => {
       <FormStepper />
       <form className={styles.form}>
         <div className={styles.input}>
-          <label>
-            Никнейм
-            <Controller
-              name='nickName'
-              control={control}
-              defaultValue=''
-              render={({ field: { ref, ...field } }) => (
-                <Input
-                  type='text'
-                  placeholder='Placeholder'
-                  {...field}
-                  inputRef={ref}
-                />
-              )}
-            />
-            {errors.nickName?.message}
-          </label>
+          <Controller
+            name='nickName'
+            control={control}
+            defaultValue=''
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                label='Никнейм'
+                type='text'
+                placeholder='Placeholder'
+                {...field}
+                inputRef={ref}
+              />
+            )}
+          />
+          {errors.nickName?.message}
         </div>
         <div className={styles.input}>
-          <label>
-            Имя
-            <Controller
-              name='firstName'
-              control={control}
-              defaultValue=''
-              render={({ field: { ref, ...field } }) => (
-                <Input
-                  type='text'
-                  placeholder='Placeholder'
-                  {...field}
-                  inputRef={ref}
-                />
-              )}
-            />
-            {errors.firstName?.message}
-          </label>
+          <Controller
+            name='firstName'
+            control={control}
+            defaultValue=''
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                label='Имя'
+                type='text'
+                placeholder='Placeholder'
+                {...field}
+                inputRef={ref}
+              />
+            )}
+          />
+          {errors.firstName?.message}
         </div>
         <div className={styles.input}>
-          <label>
-            Фамилия
-            <Controller
-              name='lastName'
-              control={control}
-              defaultValue=''
-              render={({ field: { ref, ...field } }) => (
-                <Input
-                  type='text'
-                  placeholder='Placeholder'
-                  {...field}
-                  inputRef={ref}
-                />
-              )}
-            />
-            {errors.lastName?.message}
-          </label>
+          <Controller
+            name='lastName'
+            control={control}
+            defaultValue=''
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                label='Фамилия'
+                type='text'
+                placeholder='Placeholder'
+                {...field}
+                inputRef={ref}
+              />
+            )}
+          />
+          {errors.lastName?.message}
         </div>
         <div style={{ width: 300, height: 120 }}>
           <label>

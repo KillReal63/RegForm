@@ -3,21 +3,25 @@ import styles from './Input.module.css';
 import { RefCallBack } from 'react-hook-form';
 
 type Props = {
+  label?: string;
   name?: string;
   placeholder: string;
   type?: string;
   inputRef?: RefCallBack;
 };
 
-const Input: FC<Props> = ({ placeholder, name, inputRef, ...props }) => {
+const Input: FC<Props> = ({ label, placeholder, name, inputRef, ...props }) => {
   return (
-    <input
-      ref={inputRef}
-      className={styles.input}
-      placeholder={placeholder}
-      {...props}
-      name={name}
-    />
+    <>
+      {label}
+      <input
+        ref={inputRef}
+        className={styles.input}
+        placeholder={placeholder}
+        {...props}
+        name={name}
+      />
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
+import styles from './Checkbox.module.css';
 
 type Props = {
   control: Control;
@@ -15,30 +16,29 @@ const Checkbox: FC<Props> = ({ options, control }) => {
   const [value, setValue] = useState(field.value || []);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       {options.map((option, index) => (
-        <label key={index}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <input
             onChange={(e) => {
               const valueCopy = [...value];
               valueCopy[index] = e.target.checked
                 ? parseInt(e.target.value)
-                : '';
+                : null;
               field.onChange(valueCopy);
               setValue(valueCopy);
-            }}
-            style={{
-              marginRight: 6,
             }}
             key={index}
             type='checkbox'
             checked={value.includes(option)}
             value={option}
           />
-          {option}
-        </label>
+          <label style={{ marginLeft: 10 }} key={index}>
+            {option}
+          </label>
+        </div>
       ))}
-    </>
+    </div>
   );
 };
 

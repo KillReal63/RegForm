@@ -26,21 +26,18 @@ const Advantages = () => {
       <form className={styles.form}>
         <FieldArray control={control} />
         <Checkbox options={[1, 2, 3]} control={control} />
-        <div>
-          <div>
-            <input type='radio' name='drone' value='1' />
-            <label htmlFor='1'>1</label>
-          </div>
+        <div className={styles.radio}>
+          <label>
+            <input type='radio' value='1' /> 1
+          </label>
 
-          <div>
-            <input type='radio' name='drone' value='2' />
-            <label htmlFor='2'>2</label>
-          </div>
+          <label>
+            <input type='radio' value='2' /> 2
+          </label>
 
-          <div>
-            <input type='radio' name='drone' value='3' />
-            <label htmlFor='3'>3</label>
-          </div>
+          <label>
+            <input type='radio' value='3' /> 3
+          </label>
         </div>
       </form>
       <div className={styles.footer}>
