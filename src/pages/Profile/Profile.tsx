@@ -53,7 +53,7 @@ const Profile = () => {
   });
 
   const onSubmit: SubmitHandler<Data> = (data) => {
-    console.log(data, 'data');
+    console.log(data, 'data-profile');
     navigate('/advantages');
   };
 

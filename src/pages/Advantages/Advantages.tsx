@@ -3,17 +3,15 @@ import styles from './Advantages.module.css';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import Checkbox from '../../Components/Pages/Checkbox/Checkbox';
 import FieldArray from '../../Components/Pages/FieldArray/FieldArray';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-type Data = {
-  radioGroup?: number;
-  checkboxGroup?: number[];
-  fieldArray?: {
-    adv?: string;
-  }[];
+export type FormValues = {
+  radioGroup: number;
+  checkboxGroup: (number | undefined)[];
+  fieldArray: { adv?: string }[];
 };
 
 const schema = yup
@@ -27,7 +25,7 @@ const schema = yup
       .array()
       .of(
         yup.object({
-          adv: yup.string().required('Введите значение преимущества'),
+          adv: yup.string(),
         }),
       )
       .required('Введите значение преимущества'),
@@ -41,7 +39,7 @@ const Advantages = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
     navigate('/about');
   };

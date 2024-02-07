@@ -1,8 +1,9 @@
 import { Control, Controller, useFieldArray } from 'react-hook-form';
 import styles from './FieldArray.module.css';
 import Input from '../../../ui/Input/Input';
+import { FormValues } from '../../../pages/Advantages/Advantages';
 
-const FieldArray = ({ control }: { control: Control }) => {
+const FieldArray = ({ control }: { control: Control<FormValues> }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'fieldArray',
@@ -15,7 +16,7 @@ const FieldArray = ({ control }: { control: Control }) => {
           <div key={field.id} className={styles.fields_array}>
             <Controller
               control={control}
-              name={`fieldArray[${index}].adv`}
+              name={`fieldArray.${index}.adv`}
               defaultValue=''
               render={({ field: { ref, ...field } }) => (
                 <Input placeholder='Placehoder' {...field} inputRef={ref} />
