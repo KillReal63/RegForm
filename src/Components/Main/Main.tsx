@@ -5,15 +5,16 @@ import * as yup from 'yup';
 import Input from '../../ui/Input/Input';
 import styles from './Main.module.css';
 import { useNavigate } from 'react-router-dom';
+import PhoneMask from '../Pages/PhoneMask/PhoneMask';
 
-type FormValue = {
-  phone: string | number;
+export type FormValue = {
+  phone: string;
   email: string;
 };
 
 const schema = yup
   .object({
-    phone: yup.string().required(),
+    phone: yup.string().required().max(10),
     email: yup.string().email().required(),
   })
   .required();
@@ -52,22 +53,8 @@ const Main = () => {
         </div>
       </div>
       <form className={styles.form}>
-        <div>
-          <Controller
-            name='phone'
-            control={control}
-            defaultValue=''
-            render={({ field: { ref, ...field } }) => (
-              <Input
-                label='Номер телефона'
-                type='tel'
-                {...field}
-                inputRef={ref}
-              />
-            )}
-          />
-        </div>
-        <div>
+        <div className={styles.controller_wrapper}>
+          <PhoneMask control={control} />
           <Controller
             name='email'
             control={control}

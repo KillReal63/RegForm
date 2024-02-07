@@ -6,9 +6,9 @@ type Props = {
   label?: string;
   name?: string;
   placeholder?: string;
-  type: string;
+  type?: string;
   inputRef?: RefCallBack;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input: FC<Props> = ({
