@@ -1,18 +1,43 @@
 import { useState } from 'react';
-import TextArea from '../../Components/Pages/TextArea/TextArea';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import styles from './About.module.css';
 import Modal from '../../Components/Modal/Modal';
 import { useNavigate } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+type FormValue = {
+  textArea: string;
+};
+
+const schema = yup
+  .object({
+    textArea: yup.string().required('Обязательное поле').min(200),
+  })
+  .required();
 
 const About = () => {
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValue>({
+    resolver: yupResolver(schema),
+  });
+
   const [open, setOpen] = useState(false);
 
-  const onClick = () => {
-    navigate(-1);
+  const onSubmit: SubmitHandler<FormValue> = (data) => {
+    console.log(data);
+    setOpen(true);
+  };
+
+  const handleNextClick = () => {
+    handleSubmit(onSubmit)();
   };
 
   const closeModal = () => setOpen(false);
@@ -20,14 +45,31 @@ const About = () => {
   return (
     <div className={styles.main}>
       <FormStepper variant='finally' />
-      <div style={{ width: 680, maxWidth: 680, height: 136 }}>
-        <TextArea />
+      <div
+        style={{
+          width: 680,
+          maxWidth: 680,
+          height: 136,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <label htmlFor='story'>О себе</label>
+        <textarea
+          id='story'
+          rows={5}
+          cols={33}
+          style={{ resize: 'none', padding: 10 }}
+          placeholder='Placeholder'
+          {...register('textArea')}
+        />
+        {errors.textArea?.message}
       </div>
       <div className={styles.footer}>
-        <Button variant='back' onClick={() => onClick()}>
+        <Button variant='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
-        <Button variant='forward' onClick={() => setOpen(true)}>
+        <Button variant='forward' onClick={handleNextClick}>
           Далее
         </Button>
       </div>
