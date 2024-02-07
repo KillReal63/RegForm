@@ -51,7 +51,7 @@ const Modal: FC<Props> = ({ onClose, open, title }) => {
               height='80'
               rx='40'
               fill='#05AE71'
-              fill-opacity='0.15'
+              fillOpacity='0.15'
             />
             <path
               fillRule='evenodd'

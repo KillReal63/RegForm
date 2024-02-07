@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../../ui/Button/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -6,20 +6,33 @@ import Input from '../../ui/Input/Input';
 import styles from './Main.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const schema = yup.object({
-  phone: yup.number().positive().integer().required(),
-  email: yup.string().email(),
-});
+type FormValue = {
+  phone: string | number;
+  email: string;
+};
+
+const schema = yup
+  .object({
+    phone: yup.string().required(),
+    email: yup.string().email().required(),
+  })
+  .required();
 
 const Main = () => {
-  const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const { handleSubmit, control } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const onSubmit: SubmitHandler<FormValue> = (data) => {
+    console.log(data);
     navigate('/profile');
   };
-  const onSubmit = () => console.log('test');
+
+  const handleNextClick = () => {
+    handleSubmit(onSubmit)();
+  };
 
   return (
     <div className={styles.main}>
@@ -39,17 +52,41 @@ const Main = () => {
         </div>
       </div>
       <form className={styles.form}>
-        <label>Номер телефона</label>
-        <Input placeholder='+7 (900) 000-00-00' {...register('phone')} />
-        <label>E mail</label>
-        <Input
-          placeholder='webstudio.fractal@example.com'
-          {...register('email')}
-        />
-        <Button onClick={onClick} variant='forward'>
-          Начать
-        </Button>
+        <div>
+          <Controller
+            name='phone'
+            control={control}
+            defaultValue=''
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                label='Номер телефона'
+                type='tel'
+                {...field}
+                inputRef={ref}
+              />
+            )}
+          />
+        </div>
+        <div>
+          <Controller
+            name='email'
+            control={control}
+            defaultValue=''
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                label='E-mail'
+                type='email'
+                placeholder='webstudio.fractal@example.com'
+                {...field}
+                inputRef={ref}
+              />
+            )}
+          />
+        </div>
       </form>
+      <Button onClick={handleNextClick} variant='forward'>
+        Начать
+      </Button>
     </div>
   );
 };
