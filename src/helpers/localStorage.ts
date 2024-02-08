@@ -17,3 +17,15 @@ export const getLocal = (k: string) => {
     return [];
   }
 };
+
+export const getAllStorage = () => {
+  const allData = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key !== null) {
+      const value = getLocal(key);
+      Object.assign(allData, value);
+    }
+  }
+  return allData;
+};

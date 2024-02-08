@@ -1,13 +1,16 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
-import styles from './About.module.css';
 import Modal from '../../Components/Modal/Modal';
 import { useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getLocal, setLocal } from '../../helpers/localStorage';
+import { getAllStorage, getLocal, setLocal } from '../../helpers/localStorage';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { addUser } from '../../Services/user';
+import styles from './About.module.css';
 
 type FormValue = {
   textArea: string;
@@ -21,6 +24,7 @@ const schema = yup
 
 const About = () => {
   const navigate = useNavigate();
+  const dispatch: Dispatch = useDispatch();
 
   const {
     register,
@@ -42,9 +46,21 @@ const About = () => {
     }
   }, [setValue]);
 
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.target.value;
+    setCharCount(text.length);
+  };
+
+  const allData = getAllStorage();
+
   const onSubmit: SubmitHandler<FormValue> = (data) => {
+    document.body.style.cursor = 'wait';
     setLocal('user-about', data);
-    setOpen(true);
+    dispatch(addUser(allData));
+    setTimeout(() => {
+      document.body.style.cursor = 'default';
+      setOpen(true);
+    }, 5000);
   };
 
   const handleNextClick = () => {
@@ -52,11 +68,6 @@ const About = () => {
   };
 
   const closeModal = () => setOpen(false);
-
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = e.target.value;
-    setCharCount(text.length);
-  };
 
   return (
     <div className={styles.main}>
@@ -98,7 +109,7 @@ const About = () => {
           Далее
         </Button>
       </div>
-      {open && <Modal onClose={closeModal} open={open} title='close'/>}
+      {open && <Modal onClose={closeModal} open={open} />}
     </div>
   );
 };
