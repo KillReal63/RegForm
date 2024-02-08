@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
-import styles from './Checkbox.module.css';
 import { FormValues } from '../../../pages/Advantages/Advantages';
+import { getLocal } from '../../../helpers/localStorage';
 
 const Checkbox = ({
   options,
@@ -15,30 +15,38 @@ const Checkbox = ({
     name: 'checkboxGroup',
   });
 
-  const [value, setValue] = useState(field.value || []);
+  const [value, setValue] = useState([]);
+
+  useEffect(() => {
+    const { checkboxGroup } = getLocal('user-adv');
+    if (checkboxGroup) {
+      setValue(checkboxGroup);
+    }
+  }, [setValue]);
 
   return (
-    <div className={styles.wrapper}>
-      {options.map((option, index) => (
-        <div style={{ display: 'flex', alignItems: 'center' }} key={index}>
-          <input
-            onChange={(e) => {
-              const valueCopy = [...value];
-              valueCopy[index] = e.target.checked
-                ? parseInt(e.target.value)
-                : undefined;
-              field.onChange(valueCopy);
-              setValue(valueCopy);
-            }}
-            key={index}
-            type='checkbox'
-            checked={value.includes(option)}
-            value={option}
-          />
-          <label style={{ marginLeft: 10 }}>{option}</label>
-        </div>
-      ))}
-    </div>
+    value && (
+      <div style={{ display: 'grid' }}>
+        {options.map((option, index) => (
+          <div style={{ display: 'flex', alignItems: 'center' }} key={index}>
+            <input
+              onChange={(e) => {
+                const valueCopy = [...value];
+                valueCopy[index] = e.target.checked
+                  ? parseInt(e.target.value)
+                  : undefined;
+                field.onChange(valueCopy);
+                setValue(valueCopy);
+              }}
+              type='checkbox'
+              checked={value.includes(option)}
+              value={option}
+            />
+            <label style={{ marginLeft: 10 }}>{option}</label>
+          </div>
+        ))}
+      </div>
+    )
   );
 };
 

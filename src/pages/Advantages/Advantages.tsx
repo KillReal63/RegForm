@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { getLocal, setLocal } from '../../helpers/localStorage';
+import RadioGroup from '../../Components/Pages/RadioGroup/RadioGroup';
 
 export type FormValues = {
   radioGroup: number;
@@ -37,10 +38,9 @@ const schema = yup
   .required();
 
 const Advantages = () => {
-  const { control, handleSubmit, register, setValue } = useForm({
+  const { control, handleSubmit, setValue } = useForm({
     resolver: yupResolver(schema),
   });
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,36 +73,10 @@ const Advantages = () => {
           Checkbox группа
           <Checkbox options={[1, 2, 3]} control={control} />
         </label>
-        <div className={styles.radio}>
-          <p style={{ fontWeight: 500 }}>Radio группа</p>
-          <label>
-            <input
-              {...register('radioGroup')}
-              type='radio'
-              value={1}
-              name='radioGroup'
-            />{' '}
-            1
-          </label>
-          <label>
-            <input
-              {...register('radioGroup')}
-              type='radio'
-              value={2}
-              name='radioGroup'
-            />{' '}
-            2
-          </label>
-          <label>
-            <input
-              {...register('radioGroup')}
-              type='radio'
-              value={3}
-              name='radioGroup'
-            />{' '}
-            3
-          </label>
-        </div>
+        <label style={{ fontWeight: 500 }}>
+          Radio группа
+          <RadioGroup options={[1, 2, 3]} control={control} />
+        </label>
       </form>
       <div className={styles.footer}>
         <Button variant='back' onClick={() => navigate(-1)}>

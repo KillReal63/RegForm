@@ -27,9 +27,9 @@ const Main = () => {
   });
 
   useEffect(() => {
-    const data = getLocal('user-contacts');
-    if (data) {
-      setValue('email', data.email);
+    const { email } = getLocal('user-contacts');
+    if (email) {
+      setValue('email', email);
     }
   }, [setValue]);
 
@@ -50,13 +50,22 @@ const Main = () => {
         <div className={styles.avatar}>АИ</div>
         <div className={styles.info}>
           <p>Алексей Иванов</p>
-          <a href='' style={{ marginRight: 10 }}>
+          <a
+            href='https://cdn.memes.com/profilebackgroundpics/8895011599526990/image/501608530132.jpg'
+            style={{ marginRight: 10 }}
+          >
             Git
           </a>
-          <a href='' style={{ marginRight: 10 }}>
+          <a
+            href='https://cdn.memes.com/profilebackgroundpics/8895011599526990/image/501608530132.jpg'
+            style={{ marginRight: 10 }}
+          >
             Telegram
           </a>
-          <a href='' style={{ marginRight: 10 }}>
+          <a
+            href='https://cdn.memes.com/profilebackgroundpics/8895011599526990/image/501608530132.jpg'
+            style={{ marginRight: 10 }}
+          >
             Резюме
           </a>
         </div>

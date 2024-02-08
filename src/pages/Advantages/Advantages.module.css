@@ -12,9 +12,9 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 680px;
   gap: 24px;
-  margin: 64px 0 64px 110px;
+  margin: 64px 0;
 }
 
 .footer {
@@ -22,8 +22,4 @@
   justify-content: space-between;
   width: 680px;
   margin-bottom: 80px;
-}
-
-.radio {
-  display: grid;
 }

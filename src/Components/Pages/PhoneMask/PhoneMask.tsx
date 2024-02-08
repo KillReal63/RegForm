@@ -12,9 +12,9 @@ const PhoneMask = ({
   setValue: UseFormSetValue<FormValue>;
 }) => {
   useEffect(() => {
-    const data = getLocal('user-contacts');
-    if (data) {
-      setValue('phone', data.phone);
+    const { phone } = getLocal('user-contacts');
+    if (phone) {
+      setValue('phone', phone);
     }
   }, [setValue]);
 
