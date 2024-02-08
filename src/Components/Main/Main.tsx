@@ -16,7 +16,7 @@ export type FormValue = {
 
 const schema = yup
   .object({
-    phone: yup.string().required(),
+    phone: yup.string().required().min(18),
     email: yup.string().email().required(),
   })
   .required();

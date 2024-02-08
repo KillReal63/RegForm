@@ -1,3 +1,5 @@
+//изменить состояение checked у groups
+
 import Button from '../../ui/Button/Button';
 import styles from './Advantages.module.css';
 import FormStepper from '../../ui/FormStepper/FormStepper';
@@ -7,6 +9,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
+import { getLocal, setLocal } from '../../helpers/localStorage';
 
 export type FormValues = {
   radioGroup: number;
@@ -33,14 +37,23 @@ const schema = yup
   .required();
 
 const Advantages = () => {
-  const { control, handleSubmit, register } = useForm({
+  const { control, handleSubmit, register, setValue } = useForm({
     resolver: yupResolver(schema),
   });
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const data = getLocal('user-adv');
+    if (data) {
+      setValue('radioGroup', data.radioGroup);
+      setValue('checkboxGroup', data.checkboxGroup);
+      setValue('fieldArray', data.fieldArray);
+    }
+  }, [setValue]);
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+    setLocal('user-adv', data);
     navigate('/about');
   };
 
@@ -60,7 +73,6 @@ const Advantages = () => {
           Checkbox группа
           <Checkbox options={[1, 2, 3]} control={control} />
         </label>
-
         <div className={styles.radio}>
           <p style={{ fontWeight: 500 }}>Radio группа</p>
           <label>

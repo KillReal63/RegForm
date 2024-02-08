@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import styles from './About.module.css';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { getLocal, setLocal } from '../../helpers/localStorage';
 
 type FormValue = {
   textArea: string;
@@ -25,6 +26,7 @@ const About = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FormValue>({
     resolver: yupResolver(schema),
   });
@@ -33,8 +35,15 @@ const About = () => {
 
   const [charCount, setCharCount] = useState(0);
 
+  useEffect(() => {
+    const data = getLocal('user-about');
+    if (data) {
+      setValue('textArea', data.textArea);
+    }
+  }, [setValue]);
+
   const onSubmit: SubmitHandler<FormValue> = (data) => {
-    console.log(data);
+    setLocal('user-about', data);
     setOpen(true);
   };
 
@@ -89,7 +98,7 @@ const About = () => {
           Далее
         </Button>
       </div>
-      {open && <Modal onClose={closeModal} open={open} />}
+      {open && <Modal onClose={closeModal} open={open} title='close'/>}
     </div>
   );
 };
