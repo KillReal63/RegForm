@@ -1,7 +1,5 @@
-
-
 const userSlice = () => {
-  return console.log('suka nax');
+  return 'suka nax';
 };
 
 export default userSlice;

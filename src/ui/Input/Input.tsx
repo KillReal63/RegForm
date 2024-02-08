@@ -8,6 +8,7 @@ type Props = {
   placeholder?: string;
   type?: string;
   inputRef?: RefCallBack;
+  value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -17,6 +18,7 @@ const Input: FC<Props> = ({
   name,
   inputRef,
   onChange,
+  value,
   ...props
 }) => {
   return (
@@ -28,6 +30,7 @@ const Input: FC<Props> = ({
         className={styles.input}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
         {...props}
       />
     </>

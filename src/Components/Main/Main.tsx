@@ -6,6 +6,8 @@ import Input from '../../ui/Input/Input';
 import styles from './Main.module.css';
 import { useNavigate } from 'react-router-dom';
 import PhoneMask from '../Pages/PhoneMask/PhoneMask';
+import { getLocal, setLocal } from '../../helpers/localStorage';
+import { useEffect } from 'react';
 
 export type FormValue = {
   phone: string;
@@ -20,14 +22,21 @@ const schema = yup
   .required();
 
 const Main = () => {
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, setValue } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    const data = getLocal('user-contacts');
+    if (data) {
+      setValue('email', data.email);
+    }
+  }, [setValue]);
 
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FormValue> = (data) => {
-    console.log(data);
+    setLocal('user-contacts', data);
     navigate('/profile');
   };
 
@@ -54,7 +63,7 @@ const Main = () => {
       </div>
       <form className={styles.form}>
         <div className={styles.controller_wrapper}>
-          <PhoneMask control={control} />
+          <PhoneMask control={control} setValue={setValue} />
           <Controller
             name='email'
             control={control}
@@ -64,8 +73,8 @@ const Main = () => {
                 label='E-mail'
                 type='email'
                 placeholder='webstudio.fractal@example.com'
-                {...field}
                 inputRef={ref}
+                {...field}
               />
             )}
           />

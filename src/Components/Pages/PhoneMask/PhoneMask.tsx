@@ -1,8 +1,23 @@
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 import { FormValue } from '../../Main/Main';
 import Input from '../../../ui/Input/Input';
+import { useEffect } from 'react';
+import { getLocal } from '../../../helpers/localStorage';
 
-const PhoneMask = ({ control }: { control: Control<FormValue> }) => {
+const PhoneMask = ({
+  control,
+  setValue,
+}: {
+  control: Control<FormValue>;
+  setValue: UseFormSetValue<FormValue>;
+}) => {
+  useEffect(() => {
+    const data = getLocal('user-contacts');
+    if (data) {
+      setValue('phone', data.phone);
+    }
+  }, [setValue]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 10 }}>
       <Controller

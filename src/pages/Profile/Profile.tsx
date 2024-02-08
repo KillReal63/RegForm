@@ -7,6 +7,8 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Select from 'react-select';
+import { getLocal, setLocal } from '../../helpers/localStorage';
+import { useEffect } from 'react';
 
 type Data = {
   nickName: string;
@@ -48,12 +50,23 @@ const Profile = () => {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    const data = getLocal('user-data');
+    if (data) {
+      setValue('nickName', data.nickName);
+      setValue('firstName', data.firstName);
+      setValue('lastName', data.lastName);
+      setValue('gender', data.gender);
+    }
+  }, [setValue]);
+
   const onSubmit: SubmitHandler<Data> = (data) => {
-    console.log(data, 'data-profile');
+    setLocal('user-data', data);
     navigate('/advantages');
   };
 
