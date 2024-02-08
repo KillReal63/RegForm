@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Button from '../../ui/Button/Button';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import styles from './About.module.css';
@@ -14,7 +14,7 @@ type FormValue = {
 
 const schema = yup
   .object({
-    textArea: yup.string().required('Обязательное поле').min(200),
+    textArea: yup.string().required('Обязательное поле').max(200),
   })
   .required();
 
@@ -31,6 +31,8 @@ const About = () => {
 
   const [open, setOpen] = useState(false);
 
+  const [charCount, setCharCount] = useState(0);
+
   const onSubmit: SubmitHandler<FormValue> = (data) => {
     console.log(data);
     setOpen(true);
@@ -42,6 +44,11 @@ const About = () => {
 
   const closeModal = () => setOpen(false);
 
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.target.value;
+    setCharCount(text.length);
+  };
+
   return (
     <div className={styles.main}>
       <FormStepper variant='finally' />
@@ -49,7 +56,6 @@ const About = () => {
         style={{
           width: 680,
           maxWidth: 680,
-          height: 136,
           display: 'flex',
           flexDirection: 'column',
         }}
@@ -62,8 +68,18 @@ const About = () => {
           style={{ resize: 'none', padding: 10 }}
           placeholder='Placeholder'
           {...register('textArea')}
+          onChange={handleChange}
         />
-        {errors.textArea?.message}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: 64,
+          }}
+        >
+          <p>{errors.textArea?.message}</p>
+          <p>{charCount}</p>
+        </div>
       </div>
       <div className={styles.footer}>
         <Button variant='back' onClick={() => navigate(-1)}>
