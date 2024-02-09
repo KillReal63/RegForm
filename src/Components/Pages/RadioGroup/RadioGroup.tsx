@@ -1,5 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 import { FormValues } from '../../../pages/Advantages/Advantages';
+import { getLocal } from '../../../helpers/localStorage';
 
 const RadioGroup = ({
   options,
@@ -8,6 +9,8 @@ const RadioGroup = ({
   options: number[];
   control: Control<FormValues>;
 }) => {
+  const { radioGroup } = getLocal('user-adv');
+
   return (
     <div style={{ display: 'grid' }}>
       {options.map((option, index) => (
@@ -17,7 +20,13 @@ const RadioGroup = ({
             name='radioGroup'
             render={({ field: { ref, ...field } }) => (
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <input type='radio' ref={ref} {...field} value={option} />
+                <input
+                  type='radio'
+                  ref={ref}
+                  {...field}
+                  value={option}
+                  defaultChecked={radioGroup === option}
+                />
                 <label style={{ marginLeft: 10 }}>{option}</label>
               </div>
             )}

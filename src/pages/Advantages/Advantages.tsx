@@ -15,17 +15,14 @@ import RadioGroup from '../../Components/Pages/RadioGroup/RadioGroup';
 
 export type FormValues = {
   radioGroup: number;
-  checkboxGroup: (number | undefined)[];
+  checkboxGroup?: (number | undefined)[];
   fieldArray: { adv?: string }[];
 };
 
 const schema = yup
   .object({
     radioGroup: yup.number().required('Выберите один элем.'),
-    checkboxGroup: yup
-      .array()
-      .of(yup.number())
-      .required('Выберите один или несколько элем.'),
+    checkboxGroup: yup.array().of(yup.number()),
     fieldArray: yup
       .array()
       .of(
@@ -53,6 +50,7 @@ const Advantages = () => {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log('test');
     setLocal('user-adv', data);
     navigate('/about');
   };
@@ -71,7 +69,7 @@ const Advantages = () => {
         </label>
         <label style={{ fontWeight: 500 }}>
           Checkbox группа
-          <Checkbox options={[1, 2, 3]} control={control} />
+          <Checkbox options={[1, 2, 3]} control={control} setValue={setValue}/>
         </label>
         <label style={{ fontWeight: 500 }}>
           Radio группа
