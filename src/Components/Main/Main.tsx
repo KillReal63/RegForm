@@ -43,19 +43,19 @@ const Main: FC = () => {
           <p>Алексей Иванов</p>
           <a
             href='https://cdn.memes.com/profilebackgroundpics/8895011599526990/image/501608530132.jpg'
-            style={{ marginRight: 10 }}
+            className={styles.href}
           >
             Git
           </a>
           <a
             href='https://cdn.memes.com/profilebackgroundpics/8895011599526990/image/501608530132.jpg'
-            style={{ marginRight: 10 }}
+            className={styles.href}
           >
             Telegram
           </a>
           <a
             href='https://cdn.memes.com/profilebackgroundpics/8895011599526990/image/501608530132.jpg'
-            style={{ marginRight: 10 }}
+            className={styles.href}
           >
             Резюме
           </a>
