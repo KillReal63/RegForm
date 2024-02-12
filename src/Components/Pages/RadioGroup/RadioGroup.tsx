@@ -1,14 +1,9 @@
-import { Control, Controller } from 'react-hook-form';
-import { FormValues } from '../../../pages/Advantages/Advantages';
+import { FC } from 'react';
+import { Controller } from 'react-hook-form';
 import { getLocal } from '../../../helpers/localStorage';
+import { TRadio } from '../../../Shared/Types/AdvantagesTypes';
 
-const RadioGroup = ({
-  options,
-  control,
-}: {
-  options: number[];
-  control: Control<FormValues>;
-}) => {
+const RadioGroup: FC<TRadio> = ({ options, control }) => {
   const { radioGroup } = getLocal('user-adv');
 
   return (

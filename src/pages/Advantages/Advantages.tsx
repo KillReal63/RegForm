@@ -1,28 +1,21 @@
-//изменить состояение checked у groups
-
-import Button from '../../ui/Button/Button';
-import styles from './Advantages.module.css';
-import FormStepper from '../../ui/FormStepper/FormStepper';
-import Checkbox from '../../Components/Pages/Checkbox/Checkbox';
-import FieldArray from '../../Components/Pages/FieldArray/FieldArray';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Control, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
-import { getLocal, setLocal } from '../../helpers/localStorage';
+import FormStepper from '../../ui/FormStepper/FormStepper';
+import FieldArray from '../../Components/Pages/FieldArray/FieldArray';
+import Checkbox from '../../Components/Pages/Checkbox/Checkbox';
 import RadioGroup from '../../Components/Pages/RadioGroup/RadioGroup';
-
-export type FormValues = {
-  radioGroup: number;
-  checkboxGroup?: (number | undefined)[];
-  fieldArray: { adv?: string }[];
-};
+import Button from '../../ui/Button/Button';
+import { getLocal, setLocal } from '../../helpers/localStorage';
+import { TAdvantages } from '../../Shared/Types/AdvantagesTypes';
+import styles from './Advantages.module.css';
 
 const schema = yup
   .object({
-    radioGroup: yup.number().required('Выберите один элем.'),
-    checkboxGroup: yup.array().of(yup.number()),
+    radioGroup: yup.number().required(),
+    checkboxGroup: yup.array().required(),
     fieldArray: yup
       .array()
       .of(
@@ -30,11 +23,11 @@ const schema = yup
           adv: yup.string(),
         }),
       )
-      .required('Введите значение преимущества'),
+      .required(),
   })
   .required();
 
-const Advantages = () => {
+const Advantages: FC = () => {
   const { control, handleSubmit, setValue } = useForm({
     resolver: yupResolver(schema),
   });
@@ -44,43 +37,48 @@ const Advantages = () => {
     const data = getLocal('user-adv');
     if (data) {
       setValue('radioGroup', data.radioGroup);
-      setValue('checkboxGroup', data.checkboxGroup);
       setValue('fieldArray', data.fieldArray);
     }
   }, [setValue]);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log('test');
+  const onSubmit: SubmitHandler<TAdvantages> = (data) => {
     setLocal('user-adv', data);
     navigate('/about');
-  };
-
-  const handleNextClick = () => {
-    handleSubmit(onSubmit)();
   };
 
   return (
     <div className={styles.main}>
       <FormStepper variant='secondary' />
       <form className={styles.form}>
-        <label style={{ fontWeight: 500 }}>
+        <label className={styles.label}>
           Преимущества
-          <FieldArray control={control} />
+          <FieldArray control={control as Control<TAdvantages>} />
         </label>
-        <label style={{ fontWeight: 500 }}>
+        <label className={styles.label}>
           Checkbox группа
-          <Checkbox options={[1, 2, 3]} control={control} setValue={setValue}/>
+          <Checkbox
+            options={[1, 2, 3]}
+            control={control as Control<TAdvantages>}
+            setValue={setValue}
+          />
         </label>
-        <label style={{ fontWeight: 500 }}>
+        <label className={styles.label}>
           Radio группа
-          <RadioGroup options={[1, 2, 3]} control={control} />
+          <RadioGroup
+            options={[1, 2, 3]}
+            control={control as Control<TAdvantages>}
+          />
         </label>
       </form>
       <div className={styles.footer}>
         <Button variant='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
-        <Button type='submit' variant='forward' onClick={handleNextClick}>
+        <Button
+          type='submit'
+          variant='forward'
+          onClick={handleSubmit(onSubmit)}
+        >
           Далее
         </Button>
       </div>

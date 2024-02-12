@@ -1,21 +1,21 @@
-import styles from './Profile.module.css';
-import Input from '../../ui/Input/Input';
-import Button from '../../ui/Button/Button';
-import FormStepper from '../../ui/FormStepper/FormStepper';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import {
+  useForm,
+  Controller,
+  SubmitHandler,
+  Control,
+  FieldError,
+} from 'react-hook-form';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import FormStepper from '../../ui/FormStepper/FormStepper';
 import Select from 'react-select';
+import Button from '../../ui/Button/Button';
+import ProfileInputs from '../../Components/Pages/ProfileInputs/ProfileInputs';
 import { getLocal, setLocal } from '../../helpers/localStorage';
-import { useEffect } from 'react';
-
-type Data = {
-  nickName: string;
-  firstName: string;
-  lastName: string;
-  gender: { value: string; label: string };
-};
+import { TProfile } from '../../Shared/Types/ProfileTypes';
+import styles from './Profile.module.css';
 
 const schema = yup
   .object({
@@ -43,9 +43,8 @@ const schema = yup
   })
   .required();
 
-const Profile = () => {
+const Profile: FC = () => {
   const navigate = useNavigate();
-
   const {
     control,
     handleSubmit,
@@ -65,71 +64,25 @@ const Profile = () => {
     }
   }, [setValue]);
 
-  const onSubmit: SubmitHandler<Data> = (data) => {
+  const onSubmit: SubmitHandler<TProfile> = (data) => {
     setLocal('user-data', data);
     navigate('/advantages');
-  };
-
-  const handleNextClick = () => {
-    handleSubmit(onSubmit)();
   };
 
   return (
     <div className={styles.main}>
       <FormStepper />
       <form className={styles.form}>
-        <div className={styles.input}>
-          <Controller
-            name='nickName'
-            control={control}
-            defaultValue=''
-            render={({ field: { ref, ...field } }) => (
-              <Input
-                label='Никнейм'
-                type='text'
-                placeholder='Placeholder'
-                {...field}
-                inputRef={ref}
-              />
-            )}
-          />
-          {errors.nickName?.message}
-        </div>
-        <div className={styles.input}>
-          <Controller
-            name='firstName'
-            control={control}
-            defaultValue=''
-            render={({ field: { ref, ...field } }) => (
-              <Input
-                label='Имя'
-                type='text'
-                placeholder='Placeholder'
-                {...field}
-                inputRef={ref}
-              />
-            )}
-          />
-          {errors.firstName?.message}
-        </div>
-        <div className={styles.input}>
-          <Controller
-            name='lastName'
-            control={control}
-            defaultValue=''
-            render={({ field: { ref, ...field } }) => (
-              <Input
-                label='Фамилия'
-                type='text'
-                placeholder='Placeholder'
-                {...field}
-                inputRef={ref}
-              />
-            )}
-          />
-          {errors.lastName?.message}
-        </div>
-        <div style={{ width: 300, height: 120 }}>
+        <ProfileInputs
+          control={control as Control<TProfile>}
+          errors={errors as { [key: string]: FieldError }}
+          options={[
+            { name: 'nickName', label: 'Никнейм' },
+            { name: 'firstName', label: 'Имя' },
+            { name: 'lastName', label: 'Фамилия' },
+          ]}
+        />
+        <div className={styles.select_wrapper}>
           <label>
             Пол
             <Controller
@@ -153,7 +106,11 @@ const Profile = () => {
         <Button variant='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
-        <Button variant='forward' type='submit' onClick={handleNextClick}>
+        <Button
+          variant='forward'
+          type='submit'
+          onClick={handleSubmit(onSubmit)}
+        >
           Далее
         </Button>
       </div>

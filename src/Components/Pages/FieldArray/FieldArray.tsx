@@ -1,9 +1,9 @@
-import { Control, Controller, useFieldArray } from 'react-hook-form';
-import styles from './FieldArray.module.css';
+import { FC } from 'react';
+import { Controller, useFieldArray } from 'react-hook-form';
 import Input from '../../../ui/Input/Input';
-import { FormValues } from '../../../pages/Advantages/Advantages';
+import { TControl } from '../../../Shared/Types/AdvantagesTypes';
 
-const FieldArray = ({ control }: { control: Control<FormValues> }) => {
+const FieldArray: FC<TControl> = ({ control }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'fieldArray',
@@ -13,7 +13,14 @@ const FieldArray = ({ control }: { control: Control<FormValues> }) => {
     <div>
       {fields.map((field, index) => {
         return (
-          <div key={field.id} className={styles.fields_array}>
+          <div
+            key={field.id}
+            style={{
+              width: 336,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
             <Controller
               control={control}
               name={`fieldArray.${index}.adv`}

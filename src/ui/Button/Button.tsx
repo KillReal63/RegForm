@@ -1,11 +1,11 @@
 import { FC, PropsWithChildren } from 'react';
 import styles from './Button.module.css';
 
-interface Props {
+type Props = {
   onClick: () => void;
   variant?: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
-}
+};
 
 const Button: FC<PropsWithChildren<Props>> = ({
   children,

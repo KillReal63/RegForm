@@ -1,9 +1,9 @@
-import { createPortal } from 'react-dom';
-import styles from './Modal.module.css';
 import { FC, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import Button from '../../ui/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import styles from './Modal.module.css';
 
 type Props = {
   onClose: () => void;
@@ -28,6 +28,11 @@ const Modal: FC<Props> = ({ onClose, open, title }) => {
       };
     }
   }, [open, onClose]);
+
+  const onClick = () => {
+    navigate('/');
+    localStorage.clear();
+  };
 
   if (title) {
     return createPortal(
@@ -102,11 +107,6 @@ const Modal: FC<Props> = ({ onClose, open, title }) => {
       document.body,
     );
   }
-
-  const onClick = () => {
-    navigate('/');
-    localStorage.clear();
-  };
 
   return createPortal(
     <>

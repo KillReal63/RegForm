@@ -1,13 +1,14 @@
+import { FC } from 'react';
 import ProgressBar from '../../assets/icons/Stepper/ProgressBar';
 import Check from '../../assets/icons/Stepper/Check';
 import Dot from '../../assets/icons/Stepper/Dot';
 import styles from './FormStepper.module.css';
 
-const FormStepper = ({
-  variant = 'primary',
-}: {
+interface Props {
   variant?: 'primary' | 'secondary' | 'finally';
-}) => {
+}
+
+const FormStepper: FC<Props> = ({ variant = 'primary' }) => {
   if (variant === 'secondary') {
     return (
       <>

@@ -1,16 +1,11 @@
-import { ChangeEvent, FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import { RefCallBack } from 'react-hook-form';
 import styles from './Input.module.css';
 
-type Props = {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  name?: string;
-  placeholder?: string;
-  type?: string;
   inputRef?: RefCallBack;
-  value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 const Input: FC<Props> = ({
   label,
@@ -19,12 +14,14 @@ const Input: FC<Props> = ({
   inputRef,
   onChange,
   value,
+  type,
   ...props
 }) => {
   return (
     <>
       {label}
       <input
+        type={type}
         ref={inputRef}
         name={name}
         className={styles.input}

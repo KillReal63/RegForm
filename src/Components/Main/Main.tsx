@@ -1,18 +1,14 @@
+import { FC, useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import Button from '../../ui/Button/Button';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import Input from '../../ui/Input/Input';
-import styles from './Main.module.css';
 import { useNavigate } from 'react-router-dom';
-import PhoneMask from '../Pages/PhoneMask/PhoneMask';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { getLocal, setLocal } from '../../helpers/localStorage';
-import { useEffect } from 'react';
-
-export type FormValue = {
-  phone: string;
-  email: string;
-};
+import Input from '../../ui/Input/Input';
+import Button from '../../ui/Button/Button';
+import PhoneMask from '../Pages/PhoneMask/PhoneMask';
+import { TMain } from '../../Shared/Types/MainTypes';
+import styles from './Main.module.css';
 
 const schema = yup
   .object({
@@ -21,10 +17,11 @@ const schema = yup
   })
   .required();
 
-const Main = () => {
+const Main: FC = () => {
   const { handleSubmit, control, setValue } = useForm({
     resolver: yupResolver(schema),
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const { email } = getLocal('user-contacts');
@@ -33,15 +30,9 @@ const Main = () => {
     }
   }, [setValue]);
 
-  const navigate = useNavigate();
-
-  const onSubmit: SubmitHandler<FormValue> = (data) => {
+  const onSubmit: SubmitHandler<TMain> = (data) => {
     setLocal('user-contacts', data);
     navigate('/profile');
-  };
-
-  const handleNextClick = () => {
-    handleSubmit(onSubmit)();
   };
 
   return (
@@ -89,7 +80,7 @@ const Main = () => {
           />
         </div>
       </form>
-      <Button onClick={handleNextClick} variant='forward'>
+      <Button onClick={handleSubmit(onSubmit)} variant='forward'>
         Начать
       </Button>
     </div>

@@ -1,26 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Control, Controller } from 'react-hook-form';
-import { FormValues } from '../../../pages/Advantages/Advantages';
+import { FC, useEffect, useState } from 'react';
+import { Controller } from 'react-hook-form';
 import { getLocal } from '../../../helpers/localStorage';
+import { TCheckbox } from '../../../Shared/Types/AdvantagesTypes';
 
-const Checkbox = ({
-  options,
-  control,
-  setValue,
-}: {
-  options: number[];
-  control: Control<FormValues>;
-}) => {
+const Checkbox: FC<TCheckbox> = ({ options, control, setValue }) => {
   const { checkboxGroup } = getLocal('user-adv');
 
-  const [newValue, setNewValue] = useState<(number | null)[]>([]);
+  const [checkboxValue, setCheckboxValue] = useState(checkboxGroup || []);
 
-  // useEffect(() => {
-  //   if (newValue !== checkboxGroup) {
+  useEffect(() => {
+    setValue('checkboxGroup', checkboxValue);
+  }, [checkboxValue, setValue]);
 
-  //     field.onChange(newValue);
-  //   }
-  // }, [newValue, checkboxGroup]);
+  const handleChange = (index: number, checked: boolean) => {
+    const newValue = [...checkboxValue];
+    newValue[index] = checked ? Number(options[index]) : null;
+    setCheckboxValue(newValue);
+  };
 
   return (
     <div style={{ display: 'grid' }}>
@@ -34,22 +30,9 @@ const Checkbox = ({
                 <input
                   ref={ref}
                   type='checkbox'
+                  checked={checkboxValue[index] === Number(option)}
                   {...field}
-                  onChange={(e) => {
-                    const updatedValue = [...newValue];
-                    updatedValue[index] = e.target.checked
-                      ? Number(e.target.value)
-                      : null;
-                    console.log(newValue);
-                    setNewValue(updatedValue);
-                    console.log(newValue);
-                    if (newValue.length !== 0) {
-                      setValue('checkboxGroup', newValue);
-                    }
-                  }}
-                  defaultChecked={
-                    newValue.length === 0 ? newValue.includes(option) : false
-                  }
+                  onChange={(e) => handleChange(index, e.target.checked)}
                   value={option}
                 />
                 <label style={{ marginLeft: 10 }}>{option}</label>

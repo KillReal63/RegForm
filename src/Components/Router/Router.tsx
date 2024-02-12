@@ -1,10 +1,11 @@
-import Profile from '../../pages/Profile/Profile';
+import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main';
+import Profile from '../../pages/Profile/Profile';
 import Advantages from '../../pages/Advantages/Advantages';
 import About from '../../pages/About/About';
 
-const Router = () => {
+const Router: FC = () => {
   const routes = [
     { name: 'main', path: '/', element: <Main /> },
     { name: 'profile', path: '/profile', element: <Profile /> },

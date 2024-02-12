@@ -23,6 +23,11 @@
   width: 300px;
 }
 
+.select_wrapper {
+  width: 300px;
+  height: 120px;
+}
+
 .select {
   max-width: 400px;
   height: 44px;
