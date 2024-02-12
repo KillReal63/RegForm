@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+Тестовое задание для трудоустройства в Fractal Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Разработка формы описания профиля:
+Требуется разработать форму отправки данных по готовому макету.
 
-Currently, two official plugins are available:
+[Макет](https://www.figma.com/file/g9tqzCpEpCe7ROq8lJloOc/FractalFrontTestAssignment?type=design&node-id=0-1&mode=design&t=LQUZzEUEzdb4KotJ-0)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Технические требования:
+Для разработки приложения использовать макет
 
-## Expanding the ESLint configuration
+В рамках дизайна формы реализовано 3 отдельных таба (шага) формы, которые можно переключать между собой. При переходе от таба к табу (в том числе возвращаясь на предыдущий) информация должна сохранятся.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+На первом экране необходимо добавить информацию о себе и по нажатию на кнопку "Начать" будет происходить переход на форму. При переходе должен меняться роут.
 
-- Configure the top-level `parserOptions` property like this:
+На каждом этапе формы нужно валидировать значения конкретного шага.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+После отправки формы показывать модальное окно с success или error. Модалку нужно будет разработать самому, не используя сторонние библиотеки или ui-компоненты.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Подготовить promise для отправки формы через api (fetch или axios) со всеми собранными данными (без привязки к api, просто подготовить). Сам запрос сымитировать через setTimeout.
+
+Валидация и описание полей:
+nickname - строковое значение, максимальная длина 30 символов, могут быть просто буквы и цифры (спец символы запрещены)
+name - строковое значение, максимальная длина 50 символов, только буквы
+sername - строковое значение, максимальная длина 50 символов, только буквы
+phone - строковое значение, форма записи +7 (900) 000-00-00 - реализовать маску ввода, +7, (), -, уже подставленные символы, валидация - цифры
+email - строковое значение, валидация на email стандартная @ и .домен
+sex - enum 'man' | 'woman' реализовать как select
+advantages - массив строк, основной критерий - массив строк. По нажатию на “Плюс” должно добавляться новое поле и так же валидироваться.
+radio - number блок, в дизайне должна быть группа элементов RadioGroup
+checkbox - массив number, в дизайне должна быть группа элементов CheckboxGroup
+about - textarea блок максимальная длина 200 символов, в правом нижнем углу добавить счётчик символов без пробелов
+
+Cтек:
+React
+Typescript
+Redux-Toolkit
+CSS modules 
+React hook form
+Yup
