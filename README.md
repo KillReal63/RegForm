@@ -3,10 +3,8 @@
 Разработка формы описания профиля:
 Требуется разработать форму отправки данных по готовому макету.
 
-[Макет](https://www.figma.com/file/g9tqzCpEpCe7ROq8lJloOc/FractalFrontTestAssignment?type=design&node-id=0-1&mode=design&t=LQUZzEUEzdb4KotJ-0)
-
 Технические требования:
-Для разработки приложения использовать макет
+Для разработки приложения использовать [макет](https://www.figma.com/file/g9tqzCpEpCe7ROq8lJloOc/FractalFrontTestAssignment?type=design&node-id=0-1&mode=design&t=LQUZzEUEzdb4KotJ-0)
 
 В рамках дизайна формы реализовано 3 отдельных таба (шага) формы, которые можно переключать между собой. При переходе от таба к табу (в том числе возвращаясь на предыдущий) информация должна сохранятся.
 
@@ -31,9 +29,9 @@ checkbox - массив number, в дизайне должна быть груп
 about - textarea блок максимальная длина 200 символов, в правом нижнем углу добавить счётчик символов без пробелов
 
 Cтек:
-React
-Typescript
-Redux-Toolkit
-CSS modules 
-React hook form
+React,
+Typescript,
+Redux-Toolkit,
+CSS modules,
+React hook form,
 Yup
