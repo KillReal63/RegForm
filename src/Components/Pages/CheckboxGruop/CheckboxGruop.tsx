@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { getLocal } from '../../../helpers/localStorage';
 import { TCheckbox } from '../../../Shared/Types/AdvantagesTypes';
 
-const Checkbox: FC<TCheckbox> = ({ options, control, setValue }) => {
+const CheckboxGruop: FC<TCheckbox> = ({ options, control, setValue }) => {
   const { checkboxGroup } = getLocal('user-adv');
 
   const [checkboxValue, setCheckboxValue] = useState(checkboxGroup || []);
@@ -45,4 +45,4 @@ const Checkbox: FC<TCheckbox> = ({ options, control, setValue }) => {
   );
 };
 
-export default Checkbox;
+export default CheckboxGruop;

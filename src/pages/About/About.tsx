@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { addUser } from '../../Services/user';
-import Modal from '../../Components/Modal/Modal';
+import Modal from '../../ui/Modal/Modal';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import Button from '../../ui/Button/Button';
 import { getAllStorage, getLocal, setLocal } from '../../helpers/localStorage';
@@ -32,6 +32,8 @@ const About: FC = () => {
   const dispatch: Dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [charCount, setCharCount] = useState(0);
 
   const { textArea } = getLocal('user-about');
@@ -45,12 +47,12 @@ const About: FC = () => {
   }, [setValue, textArea]);
 
   const onSubmit: SubmitHandler<TTextArea> = (data) => {
-    document.body.style.cursor = 'wait';
     setLocal('user-about', data);
     dispatch(addUser(allData));
+    setLoading(true);
     setTimeout(() => {
-      document.body.style.cursor = 'default';
       setOpen(true);
+      setLoading(false);
     }, 5000);
   };
 
@@ -86,6 +88,7 @@ const About: FC = () => {
           Далее
         </Button>
       </div>
+      {loading && <Modal open={loading} title='loading' onClose={() => {}} />}
       {open && <Modal onClose={closeModal} open={open} />}
     </div>
   );

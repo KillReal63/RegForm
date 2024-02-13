@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormStepper from '../../ui/FormStepper/FormStepper';
 import FieldArray from '../../Components/Pages/FieldArray/FieldArray';
-import Checkbox from '../../Components/Pages/Checkbox/Checkbox';
+import CheckboxGruop from '../../Components/Pages/CheckboxGruop/CheckboxGruop';
 import RadioGroup from '../../Components/Pages/RadioGroup/RadioGroup';
 import Button from '../../ui/Button/Button';
 import { getLocal, setLocal } from '../../helpers/localStorage';
@@ -56,7 +56,7 @@ const Advantages: FC = () => {
         </label>
         <label className={styles.label}>
           Checkbox группа
-          <Checkbox
+          <CheckboxGruop
             options={[1, 2, 3]}
             control={control as Control<TAdvantages>}
             setValue={setValue}

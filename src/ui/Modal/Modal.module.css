@@ -21,3 +21,10 @@
 .img {
   margin: 24px 0;
 }
+
+.loading {
+  position: fixed;
+  top: 40%;
+  left: 48%;
+  z-index: 1000;
+}

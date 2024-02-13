@@ -2,16 +2,17 @@ import { FC, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import Button from '../../ui/Button/Button';
+import Button from '../Button/Button';
+import Spinner from '../Spinner/Spinner';
 import styles from './Modal.module.css';
 
 type Props = {
   onClose: () => void;
   open: boolean;
-  title?: string;
+  title?: 'success' | 'error' | 'loading';
 };
 
-const Modal: FC<Props> = ({ onClose, open, title }) => {
+const Modal: FC<Props> = ({ onClose, open, title = 'success' }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +35,19 @@ const Modal: FC<Props> = ({ onClose, open, title }) => {
     localStorage.clear();
   };
 
-  if (title) {
+  if (title === 'loading') {
+    return createPortal(
+      <>
+        <ModalOverlay />
+        <div className={styles.loading}>
+          <Spinner />
+        </div>
+      </>,
+      document.body,
+    );
+  }
+
+  if (title === 'error') {
     return createPortal(
       <>
         <ModalOverlay onClick={() => onClose()} />
