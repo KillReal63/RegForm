@@ -5,11 +5,11 @@ import Dot from '../../assets/icons/Stepper/Dot';
 import styles from './FormStepper.module.css';
 
 interface Props {
-  variant: 'primary' | 'secondary' | 'finally';
+  option: 'primary' | 'secondary' | 'finally';
 }
 
-const FormStepper: FC<Props> = ({ variant = 'primary' }) => {
-  if (variant === 'secondary') {
+const FormStepper: FC<Props> = ({ option }) => {
+  if (option === 'secondary') {
     return (
       <>
         <div className={styles.wrapper}>
@@ -28,7 +28,7 @@ const FormStepper: FC<Props> = ({ variant = 'primary' }) => {
     );
   }
 
-  if (variant === 'finally') {
+  if (option === 'finally') {
     return (
       <>
         <div className={styles.wrapper}>

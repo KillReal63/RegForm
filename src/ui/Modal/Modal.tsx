@@ -111,7 +111,7 @@ const Modal: FC<Props> = ({ onClose, open, title = 'success' }) => {
               width: '100%',
             }}
           >
-            <Button variant='forward' onClick={() => onClose()}>
+            <Button option='forward' onClick={() => onClose()}>
               Назад
             </Button>
           </div>
@@ -149,7 +149,7 @@ const Modal: FC<Props> = ({ onClose, open, title = 'success' }) => {
             />
           </svg>
         </div>
-        <Button variant='forward' onClick={onClick}>
+        <Button option='forward' onClick={onClick}>
           На главную
         </Button>
       </div>

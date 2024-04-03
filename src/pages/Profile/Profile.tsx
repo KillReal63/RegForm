@@ -71,7 +71,7 @@ const Profile: FC = () => {
 
   return (
     <div className={styles.main}>
-      <FormStepper />
+      <FormStepper option='primary'/>
       <form className={styles.form}>
         <ProfileInputs
           control={control as Control<TProfile>}
@@ -103,11 +103,11 @@ const Profile: FC = () => {
         </div>
       </form>
       <div className={styles.footer}>
-        <Button variant='back' onClick={() => navigate(-1)}>
+        <Button option='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
         <Button
-          variant='forward'
+          option='forward'
           type='submit'
           onClick={handleSubmit(onSubmit)}
         >

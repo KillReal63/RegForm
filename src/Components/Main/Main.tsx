@@ -80,7 +80,7 @@ const Main: FC = () => {
           />
         </div>
       </form>
-      <Button onClick={handleSubmit(onSubmit)} variant='forward'>
+      <Button onClick={handleSubmit(onSubmit)} option='forward'>
         Начать
       </Button>
     </div>

@@ -60,7 +60,7 @@ const About: FC = () => {
 
   return (
     <div className={styles.main}>
-      <FormStepper variant='finally' />
+      <FormStepper option='finally' />
       <div className={styles.wrapper}>
         <label htmlFor='story'>О себе</label>
         <textarea
@@ -81,10 +81,10 @@ const About: FC = () => {
         </div>
       </div>
       <div className={styles.footer}>
-        <Button variant='back' onClick={() => navigate(-1)}>
+        <Button option='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
-        <Button variant='forward' onClick={handleSubmit(onSubmit)}>
+        <Button option='forward' onClick={handleSubmit(onSubmit)}>
           Далее
         </Button>
       </div>

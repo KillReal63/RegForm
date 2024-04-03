@@ -48,7 +48,7 @@ const Advantages: FC = () => {
 
   return (
     <div className={styles.main}>
-      <FormStepper variant='secondary' />
+      <FormStepper option='secondary' />
       <form className={styles.form}>
         <label className={styles.label}>
           Преимущества
@@ -71,12 +71,12 @@ const Advantages: FC = () => {
         </label>
       </form>
       <div className={styles.footer}>
-        <Button variant='back' onClick={() => navigate(-1)}>
+        <Button option='back' onClick={() => navigate(-1)}>
           Назад
         </Button>
         <Button
           type='submit'
-          variant='forward'
+          option='forward'
           onClick={handleSubmit(onSubmit)}
         >
           Далее
