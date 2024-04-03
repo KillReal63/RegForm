@@ -4,10 +4,19 @@ import Main from '../Main/Main';
 import Profile from '../../pages/Profile/Profile';
 import Advantages from '../../pages/Advantages/Advantages';
 import About from '../../pages/About/About';
+import styles from '../App/App.module.css';
 
 const Router: FC = () => {
   const routes = [
-    { name: 'main', path: '/', element: <Main /> },
+    {
+      name: 'main',
+      path: '/',
+      element: (
+        <div className={styles.app}>
+          <Main />
+        </div>
+      ),
+    },
     { name: 'profile', path: '/profile', element: <Profile /> },
     { name: 'advantages', path: '/advantages', element: <Advantages /> },
     { name: 'about', path: '/about', element: <About /> },
