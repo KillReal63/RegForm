@@ -8,6 +8,7 @@
 
 <details>
   <summary>Полное ТЗ</summary>
+  
 Разработка формы описания профиля:
 - Требуется разработать форму отправки данных по готовому макету.
 
@@ -64,4 +65,4 @@ yarn dev
 
 Приложение будет доступно по адресу http://localhost:5173
 
-Демонстрация проекта с помощью [GitHub Pages]([https://killreal63.github.io/fractaltest/](https://killreal63.github.io/RegForm/))
+Демонстрация проекта с помощью [GitHub Pages](https://killreal63.github.io/fractaltest/](https://killreal63.github.io/RegForm/)
