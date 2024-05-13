@@ -66,7 +66,7 @@ const Profile: FC = () => {
 
   const onSubmit: SubmitHandler<TProfile> = (data) => {
     setLocal('user-data', data);
-    navigate('/advantages');
+    navigate('/RegForm/advantages');
   };
 
   return (

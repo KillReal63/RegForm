@@ -31,7 +31,7 @@ const Modal: FC<Props> = ({ onClose, open, title = 'success' }) => {
   }, [open, onClose]);
 
   const onClick = () => {
-    navigate('/');
+    navigate('/RegForm');
     localStorage.clear();
   };
 

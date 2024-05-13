@@ -32,7 +32,7 @@ const Main: FC = () => {
 
   const onSubmit: SubmitHandler<TMain> = (data) => {
     setLocal('user-contacts', data);
-    navigate('/profile');
+    navigate('/RegForm/profile');
   };
 
   return (

@@ -43,7 +43,7 @@ const Advantages: FC = () => {
 
   const onSubmit: SubmitHandler<TAdvantages> = (data) => {
     setLocal('user-adv', data);
-    navigate('/about');
+    navigate('/RegForm/about');
   };
 
   return (

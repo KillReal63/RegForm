@@ -10,16 +10,16 @@ const Router: FC = () => {
   const routes = [
     {
       name: 'main',
-      path: '/',
+      path: '/RegForm',
       element: (
         <div className={styles.app}>
           <Main />
         </div>
       ),
     },
-    { name: 'profile', path: '/profile', element: <Profile /> },
-    { name: 'advantages', path: '/advantages', element: <Advantages /> },
-    { name: 'about', path: '/about', element: <About /> },
+    { name: 'profile', path: '/RegForm/profile', element: <Profile /> },
+    { name: 'advantages', path: '/RegForm/advantages', element: <Advantages /> },
+    { name: 'about', path: '/RegForm/about', element: <About /> },
   ];
 
   const route = routes.map(({ name, path, element }) => (
